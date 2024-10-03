@@ -7,11 +7,8 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-import org.springframework.security.oauth2.provider.client.BaseClientDetails;
-import org.springframework.security.oauth2.provider.client.InMemoryClientDetailsService;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 
-import java.util.List;
-import java.util.Map;
 
 @Configuration
 @EnableAuthorizationServer
@@ -38,11 +35,33 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 //
 //        clients.withClientDetails(service);
 
+//        clients
+//                .inMemory()
+//                .withClient("client")
+//                .secret("secret")
+//                .authorizedGrantTypes("password")
+//                .scopes("read");
+
         clients
                 .inMemory()
                 .withClient("client")
                 .secret("secret")
-                .authorizedGrantTypes("password")
-                .scopes("read");
+                .authorizedGrantTypes("authorization_code")
+                .scopes("read")
+                .redirectUris("http://localhost:9090/home");
+
+//        clients
+//                .inMemory()
+//                .withClient("client1")
+//                .secret("secret2")
+//                .authorizedGrantTypes("authorization_code")
+//                .scopes("read")
+//                .redirectUris("http://localhost:9090/home")
+//                .and()
+//                .withClient("client2")
+//                .secret("secret2")
+//                .authorizedGrantTypes("authorization_code","password","refresh_token")
+//                .scopes("read")
+//                .redirectUris("http://localhost:9090/home");
     }
 }
